@@ -1,0 +1,140 @@
+<div id="portrait-only"><h2>PLEASE ROTATE YOUR PHONE BACK, PORTRAIT ONLY!</h2></div>
+
+<div class="container">
+  <div class="panel">
+    <port-vert-nav [loadMainContent]="false"></port-vert-nav>
+ 
+    <section portOnScroll class="top-panel sliding-panel fade-in">
+      <div class="panel-static">
+        <div class="static-inner" [ngClass]="setClasses()">
+          <h1>
+            <span class="logo" [ngClass]="setClasses()"><img src="assets/images/portfolio/logo.svg" /></span>
+            <span class="name" [ngClass]="setClasses()">{{name}}</span>
+            <br class="mobile-only" />
+            <span class="title" [ngClass]="setClasses()">{{title}}</span>
+          </h1>         
+          <p class="tagline" [ngClass]="setClasses()" [innerHTML]="subHeading"></p>
+          <div class="skills" [ngClass]="setClasses()">
+            <ul>
+              <li *ngFor="let skill of skills">
+                  <span class="to-reveal">{{skill}}</span>
+                  <span class="to-reveal pipe" ng-class="{'desktop-only': $index === 2 || $index === 4, 'hide': $index === 6, 'hide-tablet': $index === 3}">|</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section portOnScroll class="second-panel sliding-panel fade-out">
+      <div class="panel-wrapper">
+        <div class="inner-wrap projects-list">
+          <h2 class="category-title">{{projectsTitle}}</h2>
+          <ul>
+            <li *ngFor="let project of projects">
+              <p><span class="icon"><img [src]="project.icon" /></span>{{project.companyName}} - {{project.role}}</p>
+              <ul>
+                <li *ngFor="let site of project.sites">
+                  <a *ngIf="project.companyName === 'Celerity IT'" class="proj-link" sm-modal (click)="portfolio.chosenTemplate='app/components/portfolio/modal-templates/personal-loans.html'" href="#">{{site.name}}</a>
+                  <a *ngIf="project.companyName !== 'Celerity IT'" class="proj-link" href="{{site.link}}" target="_blank">{{site.name}}</a>
+                </li>
+              </ul> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section portOnScroll class="third-panel sliding-panel fade-out">
+      <div class="panel-wrapper">
+        <div class="inner-wrap snippets">
+          <h2 class="category-title">{{codingTitle}}</h2>
+          <ul>
+            <li *ngFor="let code of coding">
+              <div class="code-link" ng-click="portfolio.showContent($index)">{{code.title}}</div>
+              <div class="content">
+                <p>{{code.description}}</p>
+                <img [src]="code.image" />
+                <p class="testimonial-copy">{{code.testimonial}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section portOnScroll class="fourth-panel sliding-panel fade-out">
+      <div class="panel-wrapper">
+        <div class="inner-wrap snippets">
+          <h2 class="category-title">{{aboutTitle}}</h2>
+          <ul>
+            <li *ngFor="let bio of about">
+              <div class="code-link" reveal-content><span class="bio-icon left" ng-include="bio.icon"></span>{{bio.heading}}</div> 
+              <div class="content">
+                <p ng-bind-html="bio.description"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section portOnScroll class="fifth-panel sliding-panel fade-out">
+      <div class="panel-wrapper">
+        <div class="inner-wrap">
+          <div class="special-note">
+            <h2 class="category-title">{{noteTitle}}</h2>
+            <p>{{specialNote}}</p>
+          </div>
+          <div class="block">
+            <h2 class="category-title">{{contactTitle}}</h2>
+            <div class="contact">
+              <ul>
+                <li class="insert-phone"></li>
+                <li class="insert-email"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="block">
+            <h2 class="category-title">{{socialTitle}}</h2>
+            <div class="social">
+              <ul>
+                <li *ngFor="let social of socials">
+                  <a [title]="social.title" target="_blank" href="social.link">
+                    <div *ngIf="social.title === 'Stack Overflow'" class="so-info-wrap">
+                      <div class="so-tooltip">
+                        <p>Reputation: {{totalSoRep}}</p>
+                        <hr />
+                        <p>Badges:</p>
+                        <ul>
+                          <li>Bronze: {{bronzeBadges}}</li>
+                          <li>Silver: {{silverBadges}}</li>
+                          <li>Gold: {{goldBadges}}</li>
+                        </ul>
+                      </div>
+                      <div class="so-info rep">{{totalSoRep}}</div>
+                      <div class="so-info badges">{{totalSoBadges}}</div>
+                    </div>
+                    <img [src]="['social.icon']" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="bg-image load-image"></div>
+  <p class="enter" ng-class="{'load-icon': portfolio.loadMainContent, 'remove-delay': portfolio.removeDelays}">
+    <span class="text"><span class="mobile-only">SWIPE&nbsp;</span><span class="desktop-only">SCROLL&nbsp;</span>UP / DOWN</span><br />
+    <span class="icon" ng-include="'assets/images/finger-swipe.svg'"></span>
+  </p>
+  <div class="hide">Two Finger Swipe Down by Jeff Portaro from the Noun Project</div>
+  <!--<div class="modal-overlay" ng-click="portfolio.closeModal()"></div>
+    <div class="modal-window">
+      <div class="modal-inner">
+        <div class="modal-display-data" ng-include="portfolio.chosenTemplate"></div>
+      </div>
+    </div>
+</div> -->
